@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 	"time"
 )
 
@@ -31,7 +32,7 @@ func writeForthSource(opts *opts) error {
 	licenseText[0] = fmt.Sprintf(licenseText[0], now.Year())
 
 	for _, line := range licenseText {
-		line = "\\ " + line + "\n"
+		line = strings.TrimRight("\\ "+line+"\n", " \t")
 		_, err = file.Write([]byte(line))
 		if err != nil {
 			return err
